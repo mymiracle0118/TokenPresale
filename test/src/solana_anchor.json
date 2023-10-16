@@ -1,0 +1,530 @@
+{
+  "version": "0.0.0",
+  "name": "solana_anchor",
+  "instructions": [
+    {
+      "name": "initializePresale",
+      "accounts": [
+        {
+          "name": "presale",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "presalePot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenForSale",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenBeingRaised",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "minAllocation",
+          "type": "u64"
+        },
+        {
+          "name": "maxAllocation",
+          "type": "u64"
+        },
+        {
+          "name": "hardcap",
+          "type": "u64"
+        },
+        {
+          "name": "tokenPerUsdNumberator",
+          "type": "u64"
+        },
+        {
+          "name": "tokenPerUsdDenominator",
+          "type": "u64"
+        },
+        {
+          "name": "totalPercentageDistributed",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "initializeClient",
+      "accounts": [
+        {
+          "name": "client",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "presale",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "clientPot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "systemProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "addToWhitelist",
+      "accounts": [
+        {
+          "name": "presale",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "client",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "member",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "startPresale",
+      "accounts": [
+        {
+          "name": "presale",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "stopPresale",
+      "accounts": [
+        {
+          "name": "presale",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "stopWhitelist",
+      "accounts": [
+        {
+          "name": "presale",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "authority",
+          "isMut": false,
+          "isSigner": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "buy",
+      "accounts": [
+        {
+          "name": "bidder",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "bidderToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "presalePot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "presale",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "client",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "distributeToken",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "authToken",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "clientPot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "mint",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "presale",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "client",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": [
+        {
+          "name": "percentageOfAmountOwed",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "setAuthority",
+      "accounts": [
+        {
+          "name": "authority",
+          "isMut": true,
+          "isSigner": true
+        },
+        {
+          "name": "newAuthority",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "presalePot",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "presale",
+          "isMut": true,
+          "isSigner": false
+        },
+        {
+          "name": "tokenProgram",
+          "isMut": false,
+          "isSigner": false
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "PresaleData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "type": "publicKey"
+          },
+          {
+            "name": "presalePot",
+            "type": "publicKey"
+          },
+          {
+            "name": "tokenForSale",
+            "type": "publicKey"
+          },
+          {
+            "name": "tokenBeingRaised",
+            "type": "publicKey"
+          },
+          {
+            "name": "minAllocation",
+            "type": "u64"
+          },
+          {
+            "name": "maxAllocation",
+            "type": "u64"
+          },
+          {
+            "name": "hardcap",
+            "type": "u64"
+          },
+          {
+            "name": "tokenPerUsdNumerator",
+            "type": "u64"
+          },
+          {
+            "name": "tokenPerUsdDenominator",
+            "type": "u64"
+          },
+          {
+            "name": "totalRaised",
+            "type": "u64"
+          },
+          {
+            "name": "totalPercentageDistributed",
+            "type": "u64"
+          },
+          {
+            "name": "isActive",
+            "type": "bool"
+          },
+          {
+            "name": "isWhitelist",
+            "type": "bool"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ClientData",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "presale",
+            "type": "publicKey"
+          },
+          {
+            "name": "owner",
+            "type": "publicKey"
+          },
+          {
+            "name": "clientPot",
+            "type": "publicKey"
+          },
+          {
+            "name": "amount",
+            "type": "u64"
+          },
+          {
+            "name": "isWhitelisted",
+            "type": "bool"
+          },
+          {
+            "name": "alreadyPaid",
+            "type": "bool"
+          },
+          {
+            "name": "isInitialized",
+            "type": "bool"
+          }
+        ]
+      }
+    }
+  ],
+  "errors": [
+    {
+      "code": 300,
+      "name": "IncorrectOwner",
+      "msg": "Account does not have correct owner"
+    },
+    {
+      "code": 301,
+      "name": "DerivedKeyInvalid",
+      "msg": "Derived key is invalid"
+    },
+    {
+      "code": 302,
+      "name": "InvalidAuthority",
+      "msg": "Invalid authority"
+    },
+    {
+      "code": 303,
+      "name": "AlreadyStarted",
+      "msg": "Presale has already started"
+    },
+    {
+      "code": 304,
+      "name": "DataTypeMismatch",
+      "msg": "Data type mismatch"
+    },
+    {
+      "code": 305,
+      "name": "AlreadyStopped",
+      "msg": "Already stopped"
+    },
+    {
+      "code": 306,
+      "name": "InvalidClientOwner",
+      "msg": "Invalid client owner"
+    },
+    {
+      "code": 307,
+      "name": "InvalidPresaleAccount",
+      "msg": "Invalid presale account"
+    },
+    {
+      "code": 308,
+      "name": "InvalidTokenProgram",
+      "msg": "Invalid token program"
+    },
+    {
+      "code": 309,
+      "name": "NotMatchPresale",
+      "msg": "Not match presale address"
+    },
+    {
+      "code": 310,
+      "name": "NotActiveYet",
+      "msg": "Preslae is not active yet"
+    },
+    {
+      "code": 311,
+      "name": "InvalidAmount",
+      "msg": "Amount is invalid"
+    },
+    {
+      "code": 312,
+      "name": "NotMatchTokenAddress",
+      "msg": "Not match token address"
+    },
+    {
+      "code": 313,
+      "name": "BalanceTooLow",
+      "msg": "Balance too low"
+    },
+    {
+      "code": 314,
+      "name": "HardcapReached",
+      "msg": "Hardcap has been reached"
+    },
+    {
+      "code": 315,
+      "name": "WillOverHardcap",
+      "msg": "You will be going over the hardcap"
+    },
+    {
+      "code": 316,
+      "name": "MoreThanMaxAllocation",
+      "msg": "You cant buy more than the max allocation"
+    },
+    {
+      "code": 317,
+      "name": "NotWhitelisted",
+      "msg": "You are not whitelisted"
+    },
+    {
+      "code": 318,
+      "name": "TokenTransferFailed",
+      "msg": "Token transfer failed"
+    },
+    {
+      "code": 319,
+      "name": "AlreadyDistributedOverflow",
+      "msg": "Already distributed 100% of tokens"
+    },
+    {
+      "code": 320,
+      "name": "NotMatchMintAddress",
+      "msg": "Not match mint address"
+    },
+    {
+      "code": 321,
+      "name": "NotMatchOwnerAddress",
+      "msg": "Not match owner address"
+    },
+    {
+      "code": 322,
+      "name": "NotMatchPresaleAddress",
+      "msg": "Not match presale address"
+    },
+    {
+      "code": 323,
+      "name": "NotMatchPresalePotAddress",
+      "msg": "Not match presale pot address"
+    },
+    {
+      "code": 324,
+      "name": "AlreadyPaied",
+      "msg": "Already paid"
+    },
+    {
+      "code": 325,
+      "name": "NotStoppedYet",
+      "msg": "Presale is not stopped yet"
+    },
+    {
+      "code": 326,
+      "name": "TokenSetAuthorityFailed",
+      "msg": "Token set authority failed"
+    }
+  ]
+}
